@@ -1,0 +1,44 @@
+[
+  {
+    "id": 110,
+    "name": "Hp-Laptop",
+    "price": 120000,
+    "qty": 2
+  },
+  {
+    "id": 110,
+    "name": "Samsung",
+    "price": 12000,
+    "qty": 2
+  },
+  {
+    "id": 11,
+    "name": "ram",
+    "price": 122222,
+    "qty": 3
+  },
+  {
+    "id": 11,
+    "name": "ram",
+    "price": 12000,
+    "qty": 3
+  },
+  {
+    "id": 11,
+    "name": "ram",
+    "price": 12000,
+    "qty": 3
+  },
+  {
+    "id": 11,
+    "name": "oppo",
+    "price": 12000,
+    "qty": 3
+  },
+  {
+    "id": 12,
+    "name": "lenovo",
+    "price": 3,
+    "qty": null
+  }
+]

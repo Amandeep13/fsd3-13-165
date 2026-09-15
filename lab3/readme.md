@@ -65,4 +65,4 @@ the content type and status code can be send back to client by two ways
    
    
     ##JSON =JAVASCRIPT NOTATION
-    server returns 
+    server returns  da

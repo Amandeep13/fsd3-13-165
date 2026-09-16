@@ -65,4 +65,13 @@ the content type and status code can be send back to client by two ways
    
    
     ##JSON =JAVASCRIPT NOTATION
-    server returns  da
+    server returns  data noyt only in html content because html content will be written by frontend developer 
+
+    the data is in json format 
+    json always stores data in key value pair enclosed bracket array can be stored by [] and one air only {} will represent one object its property represent by ","
+    example
+    {
+        id:1;
+        name:"Mobile;
+        price:
+    }

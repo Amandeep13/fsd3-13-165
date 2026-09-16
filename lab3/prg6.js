@@ -1,43 +1,46 @@
-import http from "http";
+import http from 'http'
 
-const server =http.createServer((req,res) =>{
-if(req.url==="/" &&req.method==="GET") {
-    res.statusCode=200;
-    res.end("Get Request");
 
-}
-else if(req.url==="/" && req.method ==="POST"){
-   // console.log("Request:",req)
-   let body=" ";
-   req.on("data",(chunk)=>{
-    body+=chunk;
-   });
-   req.on("end",()=>{
-    const product=JSON.parse(body);
-    console.log("receive product:",product);
-        res.statusCode=201;
+const server =http.createServer((req,res) => {
+      if (req.url === "/" && req.method === "GET") {
+        res.statusCode = 200;
+        res.end("Get Request");
+      } else if (req.url === "/" && req.method === "POST") {
+        // console.log("Request",req);
+        let body=''
+        req.on('data',(chunk)=>{
+          body+=chunk
+        });
+        req.on("end",()=> {
+          const product=JSON.parse(body);
+          console.log("received product:",product);
+           res.statusCode = 200;
+        // res.end("POST Request");
+            res.end(JSON.stringify({msg:'product added',product}));
+        });
+        
+       
+      } 
+      else if (req.url.startsWith( "/products/1") && req.method === "PUT") {
+       const productId = req.url.split("/").pop()
+        let body=''
+        req.on('data',(chunk)=>{
+          body+=chunk
+        });
+        req.on("end",()=> {
+          const product=JSON.parse(body);
+          product.id = productId
+          res.statusCode=200;
+            res.end(JSON.stringify({msg:'product updated',product}));
+        });
+       
 
-    res.end(JSON.stringigy({msg:"product added",product}));
-
-   });
-    
-
-}
-else if (req.url==="/n" && req.method=="POST"){
-res.statusCode=200;
-    res.end("POST Request");
-}
-
-else if (req.url==="/n" && req.method=="PUT"){
-res.statusCode=200;
-    res.end("PUT Request");
-}
-else if (req.url==="/n" && req.method=="DELETE"){
-res.statusCode=200;
-    res.end("DELETE Request");
-}
+      } else if (req.url === "/" && req.method === "DELETE") {
+        res.statusCode = 200;
+        res.end("DELETE Request");
+      } else {
+        res.statusCode = 404;
+        res.end("request not found");
+      }
 });
-
-server.listen(4444,() =>{
-    console.log("Prg6 is rinning...");
-});
+server.listen(4444,()=>console.log("prg6 is running"));

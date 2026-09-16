@@ -75,3 +75,14 @@ the content type and status code can be send back to client by two ways
         name:"Mobile;
         price:
     }
+    ##Headers
+    header is used to tell the client ,the type of data sent by the seerver it may be html file,JSON file/data,
+    plan text file ,Any token (fir login)
+    1.Text/plain ->text file 
+    2.text/html -> html contents/file
+    3.application/json ->json contents/file
+    4.text/css ->stylesheet 
+    5.application/form-data ->for uploading files 
+    6.application/auth ->for tokens
+    the headeers can be set by the res object at server side eby two ways
+    7.

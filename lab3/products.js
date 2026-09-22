@@ -6,7 +6,11 @@ const products= [
 let nextId=3;
   export const  getAllproducts = () =>{
     return products;
- }
+ };
  export const addProduct = () =>{
-    
- }
+    .id=nextId;
+    nextId++;
+    products.push(item);
+    return item;
+
+ };

@@ -1,107 +1,184 @@
-import http from 'http';
+import http from "http";
 
 import {
-    getAllProducts,
-    addProduct,
-    deleteProduct
+  getAllProducts,
+  addProduct,
+  deleteProduct,
+  getProductById,
+  updateProduct,
 } from "./products.js";
-
 
 const server = http.createServer((req, res) => {
 
-    // GET ALL PRODUCTS
-    if (req.url === "/api/v1/products" && req.method === "GET") {
+  // GET ALL PRODUCTS
+  if (req.url === "/api/v1/products" && req.method === "GET") {
 
-        res.statusCode = 200;
+    res.statusCode = 200;
 
-        const data = getAllProducts();
+    const data = getAllProducts();
 
-        res.setHeader("content-type", "application/json");
+    res.setHeader("content-type", "application/json");
 
-        res.end(
-            JSON.stringify({
-                count: data.length,
-                data
-            })
-        );
+    res.end(
+      JSON.stringify({
+        count: data.length,
+        data,
+      })
+    );
+  }
 
-    }
 
-    // ADD PRODUCT
-    else if (req.url === "/api/v1/products" && req.method === "POST") {
+  // ADD PRODUCT
+  else if (req.url === "/api/v1/products" && req.method === "POST") {
 
-        let body = "";
+    let body = "";
 
-        req.on("data", chunk => {
-            body += chunk;
-        });
+    req.on("data", (chunk) => {
+      body += chunk;
+    });
 
-        req.on("end", () => {
+    req.on("end", () => {
 
-            const product = JSON.parse(body);
+      const product = JSON.parse(body);
 
-            const item = addProduct(product);
+      const item = addProduct(product);
 
-            console.log("received product:", product);
+      res.statusCode = 201;
 
-            res.statusCode = 201;
+      res.setHeader("content-type", "application/json");
 
-            res.setHeader("content-type", "application/json");
+      res.end(
+        JSON.stringify({
+          msg: "product added",
+          data: item,
+        })
+      );
+    });
+  }
 
-            res.end(
-                JSON.stringify({
-                    msg: "product received",
-                    data: item
-                })
-            );
-        });
 
-    }
+  // UPDATE PRODUCT
+  else if (
+    req.url.startsWith("/api/v1/products/") &&
+    req.method === "PUT"
+  ) {
 
-    // DELETE PRODUCT
-    else if (
-        req.url.startsWith("/api/v1/products/") &&
-        req.method === "DELETE"
-    ) {
+    const productID = Number(req.url.split("/").pop());
 
-        const pid = Number(req.url.split("/").pop());
+    console.log("Update Product id:", productID);
 
-        console.log("Delete product id:", pid);
+    let body = "";
 
-        const result = deleteProduct(pid);
+    req.on("data", (chunk) => {
+      body += chunk;
+    });
 
-        res.statusCode = 200;
+    req.on("end", () => {
 
-        res.setHeader("content-type", "application/json");
+      const product = JSON.parse(body);
 
-        res.end(
-            JSON.stringify({
-                msg: "product deleted",
-                data: result
-            })
-        );
+      product.id = productID;
 
-    }
+      const updatedPrd = updateProduct(productID, product);
 
-    // DELETE /
-    else if (req.url === "/" && req.method === "DELETE") {
-
-        res.statusCode = 200;
-
-        res.end("Delete request");
-
-    }
-
-    // NOT FOUND
-    else {
+      if (!updatedPrd) {
 
         res.statusCode = 404;
 
-        res.end("request not found");
+        res.end(
+          JSON.stringify({
+            msg: `id ${productID} not found`,
+          })
+        );
+
+      } else {
+
+        res.statusCode = 200;
+
+        res.end(
+          JSON.stringify({
+            msg: "product updated",
+            updatedPrd,
+          })
+        );
+      }
+    });
+  }
+
+
+  // DELETE PRODUCT
+  else if (
+    req.url.startsWith("/api/v1/products/") &&
+    req.method === "DELETE"
+  ) {
+
+    const pid = Number(req.url.split("/").pop());
+
+    if (deleteProduct(pid)) {
+
+      res.statusCode = 200;
+
+      res.end(
+        JSON.stringify({
+          msg: "item deleted",
+        })
+      );
+
+    } else {
+
+      res.statusCode = 404;
+
+      res.end(
+        JSON.stringify({
+          msg: `product with id ${pid} not found`,
+        })
+      );
     }
+  }
+
+
+  // GET PRODUCT BY ID
+  else if (
+    req.url.startsWith("/api/v1/products/") &&
+    req.method === "GET"
+  ) {
+
+    const pid = Number(req.url.split("/").pop());
+
+    const product = getProductById(pid);
+
+    if (product) {
+
+      res.statusCode = 200;
+
+      res.end(
+        JSON.stringify({
+          data: product,
+        })
+      );
+
+    } else {
+
+      res.statusCode = 404;
+
+      res.end(
+        JSON.stringify({
+          msg: `product with id ${pid} not found`,
+        })
+      );
+    }
+  }
+
+
+  // INVALID REQUEST
+  else {
+
+    res.statusCode = 404;
+
+    res.end("request not found");
+  }
 });
 
-
-server.listen(4444, () => {
-    console.log("prg6 is running.....");
+server.listen(5000, () => {
+  console.log("prg6 is running");
 });

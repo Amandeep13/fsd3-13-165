@@ -1,32 +1,45 @@
 const products = [
-    { id: 1, name: "sam", qty: 100, price: 1000 },
-    { id: 2, name: "ram", qty: 10, price: 1000 }
+  { id: 1, name: "marker", qty: 100, price: 15 },
+  { id: 2, name: "duster", qty: 50, price: 10 },
 ];
 
 let nextId = 3;
 
 export const getAllProducts = () => {
-    return products;
+  return products;
 };
 
 export const addProduct = (item) => {
-    item.id = nextId;
-    nextId++;
-
-    products.push(item);
-
-    return item;
+  item.id = nextId;
+  nextId++;
+  products.push(item);
+  return item;
 };
 
 export const deleteProduct = (pid) => {
-    const item = products.findIndex((prd) => prd.id === pid);
+  const item = products.findIndex((prd) => prd.id === pid);
+  if (item == -1) return false;
+  products.splice(item, 1);
+  console.log("products remaining:", products);
+  return true;
+};
 
-    if (item == -1)
-        return false;
+export const updateProduct = (pid, updateItem) => {
+  const index = products.findIndex((prd) => prd.id === pid);
 
-    products.splice(item, 1);
+  if (index == -1) {
+    return false;
+  }
+  updateItem.id = pid;
+  products[index] = updateItem;
+  return updateItem;
+};
 
-    console.log("products remaining:", products);
+export const getProductById = (pid) => {
+  const index = products.findIndex((prd) => prd.id === pid);
 
-    return true;
+  if (index == -1) {
+    return false;
+  }
+  return products[index];
 };

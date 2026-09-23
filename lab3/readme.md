@@ -86,3 +86,8 @@ the content type and status code can be send back to client by two ways
     6.application/auth ->for tokens
     the headeers can be set by the res object at server side eby two ways
     7.
+    no parameter will pass 
+
+    get ->all items 
+    post ->we pass the value using  from body sectionn in json format of api tester
+    delete->to delete any product we pass parameter that is id of product  from url and data to update from body

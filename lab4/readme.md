@@ -25,3 +25,6 @@
     }
 7. create prg1.js in folder
 8. add folderName/node_module in .gitignore
+
+
+it can be changed with send function 

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BrightPath Tuition Classes">
+<title>Login | BrightPath Tuition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+:root{
+  --primary:#4f46e5;
+  --primary-dark:#3730a3;
+  --secondary:#06b6d4;
+  --dark:#172033;
+  --muted:#64748b;
+  --light:#f8fafc;
+  --white:#fff;
+  --border:#e2e8f0;
+  --success:#16a34a;
+  --shadow:0 12px 35px rgba(15,23,42,.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--dark);background:#fff;line-height:1.6}
+a{text-decoration:none;color:inherit}
+.container{width:min(1120px,92%);margin:auto}
+.navbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-inner{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{font-size:1.35rem;font-weight:800;color:var(--primary);display:flex;align-items:center;gap:9px}
+.logo i{font-size:1.5rem}
+.nav-links{display:flex;align-items:center;gap:6px;list-style:none;flex-wrap:wrap;justify-content:center}
+.nav-links a{padding:9px 13px;border-radius:9px;color:#475569;font-weight:600;font-size:.93rem}
+.nav-links a:hover,.nav-links a.active{background:#eef2ff;color:var(--primary)}
+.nav-cta{background:var(--primary)!important;color:#fff!important}
+.nav-cta:hover{background:var(--primary-dark)!important}
+.hero{padding:78px 0;background:linear-gradient(135deg,#eef2ff 0%,#ecfeff 100%)}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:center}
+.badge{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid #c7d2fe;color:var(--primary);padding:7px 12px;border-radius:999px;font-weight:700;font-size:.82rem;margin-bottom:18px}
+h1{font-size:clamp(2.3rem,5vw,4.1rem);line-height:1.08;letter-spacing:-1.5px;margin-bottom:18px}
+h2{font-size:clamp(1.8rem,3vw,2.5rem);line-height:1.2;margin-bottom:12px}
+h3{font-size:1.2rem;margin-bottom:8px}
+.lead{font-size:1.08rem;color:var(--muted);max-width:650px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 19px;border-radius:10px;border:1px solid transparent;font-weight:700;cursor:pointer;font-size:.95rem}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primary-dark)}
+.btn-outline{border-color:#cbd5e1;background:#fff;color:var(--dark)}
+.btn-outline:hover{border-color:var(--primary);color:var(--primary)}
+.hero-card,.card{background:#fff;border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow)}
+.hero-card{padding:28px}
+.illustration{height:310px;border-radius:15px;background:linear-gradient(145deg,#4f46e5,#06b6d4);display:flex;align-items:center;justify-content:center;color:#fff;position:relative;overflow:hidden}
+.illustration i{font-size:7rem;opacity:.95}
+.section{padding:72px 0}
+.section-head{text-align:center;max-width:680px;margin:0 auto 38px}
+.section-head p{color:var(--muted)}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.card{padding:25px}
+.icon-box{width:48px;height:48px;border-radius:12px;background:#eef2ff;color:var(--primary);display:grid;place-items:center;font-size:1.25rem;margin-bottom:18px}
+.muted{color:var(--muted)}
+.course-card{transition:transform .2s,box-shadow .2s}
+.course-card:hover{transform:translateY(-4px);box-shadow:0 18px 45px rgba(15,23,42,.12)}
+.course-meta{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+.tag{font-size:.78rem;background:#f1f5f9;color:#475569;border-radius:999px;padding:5px 9px}
+.list{list-style:none;margin:16px 0}
+.list li{display:flex;gap:9px;margin:9px 0;color:#475569}
+.list i{color:var(--success);margin-top:4px}
+.form-wrap{max-width:650px;margin:auto}
+.form-card{padding:32px}
+.form-group{margin-bottom:18px}
+label{display:block;font-weight:700;font-size:.9rem;margin-bottom:7px}
+input,select,textarea{width:100%;padding:12px 13px;border:1px solid #cbd5e1;border-radius:9px;font:inherit;outline:none;background:#fff}
+input:focus,select:focus,textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px #eef2ff}
+textarea{min-height:130px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+.price-card{padding:30px;position:relative}
+.price-card.featured{border:2px solid var(--primary);transform:translateY(-7px)}
+.popular{position:absolute;top:15px;right:15px;background:var(--primary);color:#fff;border-radius:999px;padding:5px 9px;font-size:.72rem;font-weight:800}
+.price{font-size:2.4rem;font-weight:800;margin:15px 0 5px}
+.price small{font-size:.9rem;color:var(--muted);font-weight:500}
+.rating{color:#f59e0b;margin:8px 0 14px}
+.feedback-card p{color:#475569}
+.cta{padding:42px;border-radius:20px;background:var(--dark);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:25px}
+.cta p{color:#cbd5e1;margin-top:6px}
+.footer{background:#0f172a;color:#cbd5e1;padding:48px 0 20px;margin-top:40px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px}
+.footer h3{color:#fff;font-size:1rem;margin-bottom:14px}
+.footer p{color:#94a3b8}
+.footer-links{list-style:none}
+.footer-links li{margin:8px 0}
+.footer-links a:hover{color:#fff}
+.social{display:flex;gap:10px;margin-top:15px}
+.social a{width:38px;height:38px;border-radius:9px;background:#1e293b;display:grid;place-items:center;color:#fff}
+.social a:hover{background:var(--primary)}
+.footer-bottom{border-top:1px solid #1e293b;margin-top:30px;padding-top:18px;text-align:center;font-size:.86rem;color:#94a3b8}
+.page-hero{padding:55px 0;background:#f8fafc;border-bottom:1px solid var(--border);text-align:center}
+.page-hero p{color:var(--muted);max-width:650px;margin:auto}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:28px}
+.stat{padding:20px;text-align:center;background:#fff;border:1px solid var(--border);border-radius:14px}
+.stat strong{display:block;font-size:1.7rem;color:var(--primary)}
+@media(max-width:850px){
+ .hero-grid,.grid-3,.grid-2,.price-grid,.footer-grid{grid-template-columns:1fr 1fr}
+ .nav-inner{padding:10px 0;align-items:flex-start}.nav-links{justify-content:flex-end}
+ .hero{padding:55px 0}
+}
+@media(max-width:600px){
+ .hero-grid,.grid-3,.grid-2,.price-grid,.footer-grid,.form-row,.stats{grid-template-columns:1fr}
+ .nav-inner{flex-direction:column}.nav-links{width:100%}.nav-links a{padding:7px 8px;font-size:.84rem}
+ .hero-card{display:none}.section{padding:52px 0}.price-card.featured{transform:none}
+ .cta{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container nav-inner">
+    <a class="logo" href="courses.html"><i class="fa-solid fa-graduation-cap"></i> BrightPath Tuition</a>
+    <ul class="nav-links">
+      <li><a class="" href="courses.html">Courses</a></li>
+      <li><a class="" href="pricing.html">Pricing</a></li>
+      <li><a class="" href="feedback.html">Feedback</a></li>
+      <li><a class="active" href="login.html">Login</a></li>
+      <li><a class="" href="register.html">Register</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+<section class="page-hero"><div class="container"><h1>Welcome back</h1><p>Log in to continue your learning journey.</p></div></section>
+<section class="section"><div class="container form-wrap"><form class="card form-card" onsubmit="event.preventDefault(); alert('Demo login submitted. Connect this form to your backend.');">
+ <div class="form-group"><label for="email">Email address</label><input id="email" type="email" required placeholder="you@example.com"></div>
+ <div class="form-group"><label for="password">Password</label><input id="password" type="password" required placeholder="Enter your password"></div>
+ <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;gap:12px"><label style="font-weight:500;margin:0"><input type="checkbox" style="width:auto;margin-right:6px"> Remember me</label><a href="#" style="color:var(--primary);font-weight:600">Forgot password?</a></div>
+ <button class="btn btn-primary" type="submit" style="width:100%"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
+ <p class="muted" style="text-align:center;margin-top:18px">New to BrightPath? <a href="register.html" style="color:var(--primary);font-weight:700">Create an account</a></p>
+ </form></div></section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="logo" href="courses.html" style="color:#fff"><i class="fa-solid fa-graduation-cap"></i> BrightPath</a>
+        <p style="margin-top:12px">Personalized tuition classes designed to make learning clearer, smarter and more enjoyable.</p>
+        <div class="social">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div><h3>Explore</h3><ul class="footer-links">
+        <li><a href="courses.html">Courses</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="feedback.html">Student Feedback</a></li>
+      </ul></div>
+      <div><h3>Account</h3><ul class="footer-links">
+        <li><a href="login.html">Login</a></li><li><a href="register.html">Register</a></li>
+      </ul></div>
+      <div><h3>Contact</h3><ul class="footer-links">
+        <li><i class="fa-solid fa-phone"></i> +91 98765 43210</li>
+        <li><i class="fa-solid fa-envelope"></i> hello@brightpath.example</li>
+        <li><i class="fa-solid fa-location-dot"></i> Your City, India</li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">© 2026 BrightPath Tuition Classes. All rights reserved.</div>
+  </div>
+</footer>
+
+</body></html>

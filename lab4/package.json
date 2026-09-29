@@ -1,0 +1,20 @@
+{
+  "name": "lab4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "prg1.js",
+  "scripts": {
+    "start": "node prg1.js",
+    "dev": "nodemon"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

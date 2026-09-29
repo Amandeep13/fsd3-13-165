@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PulseAI - Next-Gen AI Workflow Automation</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f3ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            accent: '#a855f7',
+                            neon: '#06b6d4'
+                        },
+                        dark: {
+                            bg: '#090d16',
+                            card: '#111827',
+                            border: 'rgba(255, 255, 255, 0.08)'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 4s infinite alternate',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%': { opacity: 0.4, transform: 'scale(1)' },
+                            '100%': { opacity: 0.8, transform: 'scale(1.08)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #090d16;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card-hover:hover {
+            border-color: rgba(99, 102, 241, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.2);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #a855f7 0%, #6366f1 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-btn {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            transition: all 0.3s ease;
+        }
+        .gradient-btn:hover {
+            opacity: 0.92;
+            box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.4);
+            transform: translateY(-1px);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #090d16;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #1f2937;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="custom-scrollbar">
+
+    <!-- Background Gradient Glows -->
+    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] pointer-events-none z-0 overflow-hidden">
+        <div class="absolute -top-40 left-1/4 w-[500px] h-[500px] bg-brand-500/20 rounded-full blur-[120px] animate-pulse-glow"></div>
+        <div class="absolute top-20 right-1/4 w-[400px] h-[400px] bg-brand-accent/20 rounded-full blur-[100px] animate-pulse-glow" style="animation-delay: 2s;"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 glass-card border-b border-white/5 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl gradient-btn flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-brand-500/30 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-bolt-lightning"></i>
+                </div>
+                <span class="text-xl font-extrabold tracking-tight text-white">Pulse<span class="gradient-text">.AI</span></span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-gray-300">
+                <a href="#features" class="hover:text-white transition-colors">Features</a>
+                <a href="#demo" class="hover:text-white transition-colors">Interactive Demo</a>
+                <a href="#testimonials" class="hover:text-white transition-colors">Testimonials</a>
+                <a href="#pricing" class="hover:text-white transition-colors">Pricing</a>
+                <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
+            </nav>
+
+            <!-- Nav CTAs -->
+            <div class="hidden md:flex items-center gap-4">
+                <a href="#pricing" class="text-sm font-semibold text-gray-300 hover:text-white px-4 py-2 transition-colors">Sign In</a>
+                <a href="#pricing" class="gradient-btn px-5 py-2.5 rounded-xl font-semibold text-sm text-white shadow-lg shadow-brand-500/25">Get Started Free</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white p-2 focus:outline-none" aria-label="Toggle Navigation Menu">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden glass-card border-b border-white/10 px-6 py-6 flex-col gap-4">
+            <a href="#features" class="mobile-nav-link text-gray-300 hover:text-white py-2 font-medium">Features</a>
+            <a href="#demo" class="mobile-nav-link text-gray-300 hover:text-white py-2 font-medium">Interactive Demo</a>
+            <a href="#testimonials" class="mobile-nav-link text-gray-300 hover:text-white py-2 font-medium">Testimonials</a>
+            <a href="#pricing" class="mobile-nav-link text-gray-300 hover:text-white py-2 font-medium">Pricing</a>
+            <a href="#faq" class="mobile-nav-link text-gray-300 hover:text-white py-2 font-medium">FAQ</a>
+            <div class="pt-4 border-t border-white/10 flex flex-col gap-3">
+                <a href="#pricing" class="text-center font-semibold text-gray-300 hover:text-white py-2">Sign In</a>
+                <a href="#pricing" class="gradient-btn text-center py-3 rounded-xl font-semibold text-white">Get Started Free</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-12 pb-20 lg:pt-20 lg:pb-32 overflow-hidden z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-brand-500/30 text-xs sm:text-sm font-medium text-brand-100 mb-8 shadow-inner animate-float">
+                <span class="flex h-2 w-2 rounded-full bg-brand-accent animate-ping"></span>
+                <span class="gradient-text font-semibold">PulseAI v2.4 Released</span>
+                <span class="text-gray-400">|</span>
+                <span>Automate 10x Faster</span>
+                <i class="fa-solid fa-arrow-right text-xs text-brand-500"></i>
+            </div>
+
+            <!-- Main Headline -->
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white max-w-4xl mx-auto leading-tight sm:leading-none">
+                Automate Workflows with <span class="gradient-text">Autonomous Intelligence</span>
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="mt-6 text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                Empower your team to build, scale, and optimize complex operational pipelines in seconds. No coding required. Real-time predictive analytics built-in.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
+                <a href="#pricing" class="w-full sm:w-auto gradient-btn px-8 py-4 rounded-xl font-bold text-white text-base shadow-xl shadow-brand-500/30 flex items-center justify-center gap-3 group">
+                    <span>Start Free 14-Day Trial</span>
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </a>
+                <button id="open-video-modal" class="w-full sm:w-auto glass-card glass-card-hover px-7 py-4 rounded-xl font-semibold text-gray-200 text-base flex items-center justify-center gap-3">
+                    <div class="w-7 h-7 rounded-full bg-brand-500/20 flex items-center justify-center text-brand-500">
+                        <i class="fa-solid fa-play text-xs"></i>
+                    </div>
+                    <span>Watch Demo (2 min)</span>
+                </button>
+            </div>
+
+            <!-- Hero Trust Stats -->
+            <div class="mt-10 flex items-center justify-center gap-6 text-xs sm:text-sm text-gray-400">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check-circle text-emerald-400"></i> No credit card required
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check-circle text-emerald-400"></i> 14-day free trial
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check-circle text-emerald-400"></i> SOC-2 Certified
+                </div>
+            </div>
+
+            <!-- Interactive Mockup Preview Card -->
+            <div class="mt-16 relative mx-auto max-w-5xl rounded-2xl glass-card p-3 sm:p-5 border border-white/10 shadow-2xl shadow-indigo-950/50">
+                <!-- Browser Bar -->
+                <div class="flex items-center justify-between pb-4 border-b border-white/5 px-2">
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                    </div>
+                    <div class="bg-dark-bg/80 px-4 py-1 rounded-lg text-xs font-mono text-gray-400 flex items-center gap-2 border border-white/5">
+                        <i class="fa-solid fa-lock text-emerald-400 text-[10px]"></i>
+                        <span>app.pulse.ai/dashboard/live-analytics</span>
+                    </div>
+                    <div class="text-xs text-gray-500 font-mono hidden sm:block">STATUS: <span class="text-emerald-400 font-semibold">ONLINE</span></div>
+                </div>
+
+                <!-- Dashboard Content Preview -->
+                <div class="pt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
+                    <!-- Metric Card 1 -->
+                    <div class="p-4 rounded-xl bg-dark-bg/60 border border-white/5">
+                        <div class="flex justify-between items-center text-xs text-gray-400 mb-2">
+                            <span>Workflow Execution Speed</span>
+                            <span class="text-emerald-400 font-bold">+148% <i class="fa-solid fa-arrow-up text-[10px]"></i></span>
+                        </div>
+                        <div class="text-2xl sm:text-3xl font-extrabold text-white">12ms <span class="text-xs font-normal text-gray-400">avg lat</span></div>
+                        <div class="mt-3 w-full bg-gray-800 rounded-full h-1.5 overflow-hidden">
+                            <div class="bg-gradient-to-r from-brand-500 to-brand-accent h-1.5 rounded-full w-[88%]"></div>
+                        </div>
+                    </div>
+
+                    <!-- Metric Card 2 -->
+                    <div class="p-4 rounded-xl bg-dark-bg/60 border border-white/5">
+                        <div class="flex justify-between items-center text-xs text-gray-400 mb-2">
+                            <span>Tasks Automated Today</span>
+                            <span class="text-emerald-400 font-bold">+34% <i class="fa-solid fa-arrow-up text-[10px]"></i></span>
+                        </div>
+                        <div class="text-2xl sm:text-3xl font-extrabold text-white">1,420,890</div>
+                        <div class="mt-3 w-full bg-gray-800 rounded-full h-1.5 overflow-hidden">
+                            <div class="bg-gradient-to-r from-emerald-500 to-teal-400 h-1.5 rounded-full w-[94%]"></div>
+                        </div>
+                    </div>
+
+                    <!-- Metric Card 3 -->
+                    <div class="p-4 rounded-xl bg-dark-bg/60 border border-white/5">
+                        <div class="flex justify-between items-center text-xs text-gray-400 mb-2">
+                            <span>Cost Savings Estimate</span>
+                            <span class="text-brand-accent font-bold">ROI 4.8x</span>
+                        </div>
+                        <div class="text-2xl sm:text-3xl font-extrabold text-white">$42,900 <span class="text-xs font-normal text-gray-400">/ mo</span></div>
+                        <div class="mt-3 w-full bg-gray-800 rounded-full h-1.5 overflow-hidden">
+                            <div class="bg-gradient-to-r from-brand-accent to-purple-400 h-1.5 rounded-full w-[76%]"></div>
+                        </div>
+                    </div>
+
+                    <!-- Main Interactive Graph Simulation -->
+                    <div class="md:col-span-3 p-5 rounded-xl bg-dark-bg/60 border border-white/5 mt-2">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                            <div>
+                                <h4 class="text-sm font-semibold text-white flex items-center gap-2">
+                                    <i class="fa-solid fa-chart-line text-brand-500"></i> Real-Time AI Task Throughput
+                                </h4>
+                                <p class="text-xs text-gray-400">Dynamic AI load balancing across 12 node clusters</p>
+                            </div>
+                            <div class="flex gap-2 text-xs">
+                                <span class="px-2.5 py-1 rounded-md bg-brand-500/20 text-brand-100 border border-brand-500/30">Live Simulation</span>
+                                <span id="pulse-counter" class="px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-mono">Tasks: 842/s</span>
+                            </div>
+                        </div>
+
+                        <!-- Simulated Graph Bars -->
+                        <div class="h-40 flex items-end justify-between gap-1 sm:gap-2 pt-4 px-2 border-b border-white/10" id="graph-bars">
+                            <!-- Bars injected via JS -->
+                        </div>
+                        <div class="flex justify-between text-[10px] text-gray-500 mt-2 font-mono">
+                            <span>10:00 AM</span>
+                            <span>10:15 AM</span>
+                            <span>10:30 AM</span>
+                            <span>10:45 AM</span>
+                            <span>NOW</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Logo Cloud -->
+    <section class="py-12 border-y border-white/5 bg-dark-card/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-8">Trusted by hyper-growth teams at leading tech global enterprises</p>
+            <div class="flex flex-wrap items-center justify-center gap-8 sm:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all">
+                <span class="flex items-center gap-2 font-bold text-lg text-gray-300"><i class="fa-brands fa-stripe text-2xl"></i> STRIPE</span>
+                <span class="flex items-center gap-2 font-bold text-lg text-gray-300"><i class="fa-brands fa-figma text-2xl"></i> FIGMA</span>
+                <span class="flex items-center gap-2 font-bold text-lg text-gray-300"><i class="fa-brands fa-spotify text-2xl"></i> SPOTIFY</span>
+                <span class="flex items-center gap-2 font-bold text-lg text-gray-300"><i class="fa-brands fa-slack text-2xl"></i> SLACK</span>
+                <span class="flex items-center gap-2 font-bold text-lg text-gray-300"><i class="fa-brands fa-dropbox text-2xl"></i> DROPBOX</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section id="features" class="py-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest gradient-text mb-3">Engineered For Scale</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-white">Everything you need to orchestrate intelligent AI workflows</p>
+                <p class="mt-4 text-gray-400 text-base">Replace clunky custom scripts and manual overhead with autonomous AI agents built on enterprise infrastructure.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="glass-card glass-card-hover p-8 rounded-2xl relative group">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/20 flex items-center justify-center text-brand-500 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-diagram-project"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Visual Pipeline Builder</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Drag-and-drop intuitive workflow canvas. Connect triggers, logic gates, and LLM prompts without writing boilerplate code.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="glass-card glass-card-hover p-8 rounded-2xl relative group">
+                    <div class="w-12 h-12 rounded-xl bg-brand-accent/20 flex items-center justify-center text-brand-accent text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Autonomous AI Agents</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Deploy self-correcting agents that parse unstructured documents, make context-aware decisions, and recover from API errors.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="glass-card glass-card-hover p-8 rounded-2xl relative group">
+                    <div class="w-12 h-12 rounded-xl bg-brand-neon/20 flex items-center justify-center text-brand-neon text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-gauge-high"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Sub-Second Execution</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Powered by globally distributed edge servers to guarantee ultra-low latency execution and 99.99% operational uptime.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="glass-card glass-card-hover p-8 rounded-2xl relative group">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Enterprise Security</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">End-to-end SOC2 Type II compliance, zero-data-retention options, custom role permissions, and robust SSO/SAML integration.</p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="glass-card glass-card-hover p-8 rounded-2xl relative group">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/20 flex items-center justify-center text-amber-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-plug"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">500+ Native Integrations</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Seamlessly connect with Slack, Salesforce, GitHub, PostgreSQL, OpenAI, Zendesk, and your custom REST/GraphQL endpoints.</p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="glass-card glass-card-hover p-8 rounded-2xl relative group">
+                    <div class="w-12 h-12 rounded-xl bg-rose-500/20 flex items-center justify-center text-rose-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-chart-pie"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Predictive Cost Analytics</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Gain full visibility into token usage, compute execution costs, and optimization recommendations in a single unified dashboard.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Feature Highlight / Module Section -->
+    <section id="demo" class="py-20 bg-dark-card/40 border-y border-white/5 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-xs font-bold uppercase tracking-widest gradient-text mb-3">Interactive Tour</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-white">Explore PulseAI Modules in Action</p>
+            </div>
+
+            <!-- Tab Buttons -->
+            <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mb-10" id="tab-headers">
+                <button data-tab="tab-1" class="tab-btn active px-5 py-2.5 rounded-xl text-sm font-semibold glass-card border border-brand-500/50 text-white bg-brand-500/20 transition-all">
+                    <i class="fa-solid fa-wand-magic-sparkles mr-2 text-brand-accent"></i> Workflow Canvas
+                </button>
+                <button data-tab="tab-2" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-semibold glass-card text-gray-400 hover:text-white transition-all">
+                    <i class="fa-solid fa-robot mr-2 text-brand-neon"></i> AI Agent Studio
+                </button>
+                <button data-tab="tab-3" class="tab-btn px-5 py-2.5 rounded-xl text-sm font-semibold glass-card text-gray-400 hover:text-white transition-all">
+                    <i class="fa-solid fa-sliders mr-2 text-emerald-400"></i> Real-time Monitoring
+                </button>
+            </div>
+
+            <!-- Tab Display Container -->
+            <div class="glass-card rounded-2xl p-6 sm:p-10 border border-white/10 min-h-[400px]">
+                <!-- Tab Content 1 -->
+                <div id="tab-1" class="tab-content grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <span class="text-xs font-mono px-3 py-1 rounded-full bg-brand-500/20 text-brand-100 border border-brand-500/30">MODULE 01</span>
+                        <h3 class="text-2xl sm:text-3xl font-bold text-white mt-4 mb-4">No-Code Visual Node Engine</h3>
+                        <p class="text-gray-400 leading-relaxed mb-6">Drag and drop LLMs, webhooks, databases, and conditional branches into unified pipelines. PulseAI automatically handles schema validation and error retries.</p>
+                        <ul class="space-y-3 text-sm text-gray-300">
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-brand-500"></i> Auto-generating API schemas</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-brand-500"></i> Visual debugger with time-travel replay</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-brand-500"></i> Instant one-click deployment to global edge</li>
+                        </ul>
+                    </div>
+                    <div class="bg-dark-bg p-6 rounded-xl border border-white/5 flex flex-col gap-4 font-mono text-xs">
+                        <!-- Node 1 -->
+                        <div class="p-3 rounded-lg bg-gray-900 border border-brand-500/40 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-bolt text-amber-400"></i>
+                                <div>
+                                    <div class="text-white font-semibold">Trigger: Customer Ticket Created</div>
+                                    <div class="text-gray-500 text-[10px]">Source: Zendesk Webhook</div>
+                                </div>
+                            </div>
+                            <span class="text-emerald-400">Passed (2ms)</span>
+                        </div>
+                        <div class="w-0.5 h-4 bg-brand-500/50 mx-auto"></div>
+                        <!-- Node 2 -->
+                        <div class="p-3 rounded-lg bg-gray-900 border border-brand-accent/40 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-microchip text-brand-accent"></i>
+                                <div>
+                                    <div class="text-white font-semibold">AI Agent: Intent & Sentiment Parser</div>
+                                    <div class="text-gray-500 text-[10px]">Model: Pulse-LLM-v4</div>
+                                </div>
+                            </div>
+                            <span class="text-emerald-400">Parsed: Urgent (18ms)</span>
+                        </div>
+                        <div class="w-0.5 h-4 bg-brand-500/50 mx-auto"></div>
+                        <!-- Node 3 -->
+                        <div class="p-3 rounded-lg bg-gray-900 border border-emerald-500/40 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-paper-plane text-emerald-400"></i>
+                                <div>
+                                    <div class="text-white font-semibold">Action: Escalate to On-Call Engineer</div>
+                                    <div class="text-gray-500 text-[10px]">Destination: Slack #urgent-ops</div>
+                                </div>
+                            </div>
+                            <span class="text-emerald-400">Sent (11ms)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Content 2 (Hidden by default) -->
+                <div id="tab-2" class="tab-content hidden grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <span class="text-xs font-mono px-3 py-1 rounded-full bg-brand-accent/20 text-purple-200 border border-brand-accent/30">MODULE 02</span>
+                        <h3 class="text-2xl sm:text-3xl font-bold text-white mt-4 mb-4">Self-Healing AI Agent Studio</h3>
+                        <p class="text-gray-400 leading-relaxed mb-6">Train custom autonomous agents on your proprietary docs. Agents learn from operational failures and auto-tune their prompt parameters.</p>
+                        <ul class="space-y-3 text-sm text-gray-300">
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-brand-accent"></i> Fine-tuned models tailored to your domain</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-brand-accent"></i> Automatic fallback routing on API rate limits</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-brand-accent"></i> Guardrails & PII redaction by default</li>
+                        </ul>
+                    </div>
+                    <div class="bg-dark-bg p-6 rounded-xl border border-white/5 space-y-3">
+                        <div class="text-xs font-mono text-gray-400 border-b border-white/10 pb-2 flex justify-between">
+                            <span>AGENT LOG CONSOLE</span>
+                            <span class="text-brand-accent">AUTONOMOUS MODE ACTIVE</span>
+                        </div>
+                        <p class="text-xs font-mono text-gray-300">[14:20:01] <span class="text-brand-neon">Agent Alpha</span> initiated task resolution...</p>
+                        <p class="text-xs font-mono text-gray-300">[14:20:02] Parsing schema from upstream payload...</p>
+                        <p class="text-xs font-mono text-amber-400">[14:20:03] Warning: Field 'user_id' missing. Applying auto-healing logic...</p>
+                        <p class="text-xs font-mono text-emerald-400">[14:20:03] Recovered 'user_id' via session hash lookups. Continuing execution.</p>
+                        <div class="mt-4 p-3 rounded bg-emerald-500/10 border border-emerald-500/30 text-xs text-emerald-300">
+                            <i class="fa-solid fa-circle-info mr-1"></i> Success: Workflow resolved automatically without human escalation.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Content 3 (Hidden by default) -->
+                <div id="tab-3" class="tab-content hidden grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <span class="text-xs font-mono px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-200 border border-emerald-500/30">MODULE 03</span>
+                        <h3 class="text-2xl sm:text-3xl font-bold text-white mt-4 mb-4">Deep Telemetry & Cost Control</h3>
+                        <p class="text-gray-400 leading-relaxed mb-6">Gain complete operational clarity over your AI stack. Monitor latency distribution, agent token spend, and throughput in real-time.</p>
+                        <ul class="space-y-3 text-sm text-gray-300">
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-emerald-400"></i> Detailed per-agent cost attribution</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-emerald-400"></i> Anomaly detection alerts via Slack or PagerDuty</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-emerald-400"></i> Exportable audit trails for enterprise compliance</li>
+                        </ul>
+                    </div>
+                    <div class="bg-dark-bg p-6 rounded-xl border border-white/5 space-y-4">
+                        <div class="flex justify-between items-center text-xs">
+                            <span class="text-gray-400">LLM Token Budget Usage</span>
+                            <span class="text-white font-bold">64% of monthly cap</span>
+                        </div>
+                        <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+                            <div class="bg-gradient-to-r from-teal-400 to-emerald-500 h-2 w-[64%]"></div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 pt-2">
+                            <div class="p-3 bg-gray-900 rounded-lg text-center">
+                                <span class="text-[10px] text-gray-500 uppercase block">Active Pipelines</span>
+                                <span class="text-xl font-bold text-white">142</span>
+                            </div>
+                            <div class="p-3 bg-gray-900 rounded-lg text-center">
+                                <span class="text-[10px] text-gray-500 uppercase block">Global Latency</span>
+                                <span class="text-xl font-bold text-emerald-400">8ms</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof & Testimonials -->
+    <section id="testimonials" class="py-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest gradient-text mb-3">Loved by Engineers & Leaders</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-white">What teams say after switching to PulseAI</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="glass-card p-8 rounded-2xl border border-white/10 flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-400 text-sm gap-1 mb-4">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-6">"PulseAI transformed our engineering workflows overnight. We saved over 40 hours a week of manual triage for our support and dev ops team."</p>
+                    </div>
+                    <div class="flex items-center gap-4 pt-4 border-t border-white/5">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Avatar" class="w-11 h-11 rounded-full object-cover border border-brand-500">
+                        <div>
+                            <h4 class="text-white font-semibold text-sm">Elena Rostova</h4>
+                            <p class="text-xs text-gray-400">VP of Engineering at CloudScale</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="glass-card p-8 rounded-2xl border border-white/10 flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-400 text-sm gap-1 mb-4">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-6">"The visual canvas combined with autonomous self-healing agents is unmatched. The platform paid for itself in less than two weeks."</p>
+                    </div>
+                    <div class="flex items-center gap-4 pt-4 border-t border-white/5">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80" alt="Avatar" class="w-11 h-11 rounded-full object-cover border border-brand-500">
+                        <div>
+                            <h4 class="text-white font-semibold text-sm">Marcus Chen</h4>
+                            <p class="text-xs text-gray-400">CTO at NexusOps</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="glass-card p-8 rounded-2xl border border-white/10 flex flex-col justify-between">
+                    <div>
+                        <div class="flex text-amber-400 text-sm gap-1 mb-4">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-6">"Security and speed were our main concerns. PulseAI passed our enterprise compliance checks with flying colors."</p>
+                    </div>
+                    <div class="flex items-center gap-4 pt-4 border-t border-white/5">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&auto=format&fit=crop&q=80" alt="Avatar" class="w-11 h-11 rounded-full object-cover border border-brand-500">
+                        <div>
+                            <h4 class="text-white font-semibold text-sm">Sarah Jenkins</h4>
+                            <p class="text-xs text-gray-400">Head of Product at FinTech Global</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-24 bg-dark-card/30 border-t border-white/5 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-xs font-bold uppercase tracking-widest gradient-text mb-3">Flexible Plans</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-white">Simple, transparent pricing for teams of any size</p>
+                
+                <!-- Pricing Billing Toggle -->
+                <div class="mt-8 flex items-center justify-center gap-4">
+                    <span id="monthly-label" class="text-sm font-semibold text-white">Monthly Billing</span>
+                    <button id="pricing-toggle" class="w-14 h-8 bg-brand-600 rounded-full p-1 transition-colors relative focus:outline-none" aria-label="Toggle Billing Interval">
+                        <div id="toggle-dot" class="w-6 h-6 bg-white rounded-full shadow-md transform transition-transform translate-x-6"></div>
+                    </button>
+                    <span id="annual-label" class="text-sm font-semibold text-gray-400 flex items-center gap-2">
+                        Annual Billing
+                        <span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">SAVE 20%</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+                <!-- Starter Plan -->
+                <div class="glass-card glass-card-hover rounded-2xl p-8 flex flex-col justify-between border border-white/10">
+                    <div>
+                        <h3 class="text-xl font-bold text-white">Starter</h3>
+                        <p class="text-gray-400 text-xs mt-1">Perfect for individuals & small projects</p>
+                        <div class="my-6">
+                            <span class="text-4xl font-black text-white price-value" data-monthly="$29" data-annual="$23">$23</span>
+                            <span class="text-gray-400 text-sm">/ month</span>
+                        </div>
+                        <ul class="space-y-4 text-sm text-gray-300 border-t border-white/5 pt-6">
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-500"></i> Up to 10 active workflows</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-500"></i> 50,000 monthly executions</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-500"></i> Standard execution speed</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-500"></i> Community support</li>
+                        </ul>
+                    </div>
+                    <button class="mt-8 w-full py-3.5 px-4 rounded-xl border border-white/20 font-semibold text-white hover:bg-white/5 transition-colors">Start Free Trial</button>
+                </div>
+
+                <!-- Pro Plan (Featured) -->
+                <div class="glass-card glass-card-hover rounded-2xl p-8 flex flex-col justify-between border-2 border-brand-500 relative bg-brand-500/10 shadow-2xl shadow-brand-500/20">
+                    <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 gradient-btn px-4 py-1 rounded-full text-xs font-bold text-white uppercase tracking-wider shadow-md">
+                        Most Popular
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white">Pro Scale</h3>
+                        <p class="text-gray-300 text-xs mt-1">For growing teams requiring speed & scale</p>
+                        <div class="my-6">
+                            <span class="text-4xl font-black text-white price-value" data-monthly="$99" data-annual="$79">$79</span>
+                            <span class="text-gray-400 text-sm">/ month</span>
+                        </div>
+                        <ul class="space-y-4 text-sm text-gray-200 border-t border-white/10 pt-6">
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-accent"></i> Unlimited active workflows</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-accent"></i> 1,000,000 monthly executions</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-accent"></i> Sub-second edge execution</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-accent"></i> Autonomous AI Agent Studio</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-accent"></i> Priority 24/7 Slack Support</li>
+                        </ul>
+                    </div>
+                    <button class="mt-8 w-full gradient-btn py-3.5 px-4 rounded-xl font-bold text-white shadow-lg shadow-brand-500/30">Get Started Pro</button>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="glass-card glass-card-hover rounded-2xl p-8 flex flex-col justify-between border border-white/10">
+                    <div>
+                        <h3 class="text-xl font-bold text-white">Enterprise</h3>
+                        <p class="text-gray-400 text-xs mt-1">Custom infrastructure for large organizations</p>
+                        <div class="my-6">
+                            <span class="text-4xl font-black text-white">Custom</span>
+                        </div>
+                        <ul class="space-y-4 text-sm text-gray-300 border-t border-white/5 pt-6">
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-500"></i> Unlimited volume & compute</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-500"></i> Dedicated isolated clusters</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-500"></i> Custom SLA & Zero-data retention</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-500"></i> Dedicated Solutions Architect</li>
+                        </ul>
+                    </div>
+                    <button class="mt-8 w-full py-3.5 px-4 rounded-xl border border-white/20 font-semibold text-white hover:bg-white/5 transition-colors">Contact Sales</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-24 relative z-10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest gradient-text mb-3">Got Questions?</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-white">Frequently Asked Questions</p>
+            </div>
+
+            <div class="space-y-4" id="faq-accordion">
+                <!-- FAQ Item 1 -->
+                <div class="glass-card rounded-xl border border-white/10 overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left font-semibold text-white flex justify-between items-center focus:outline-none">
+                        <span>How quickly can I integrate PulseAI into my existing workflow?</span>
+                        <i class="fa-solid fa-chevron-down text-brand-500 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-6 text-sm text-gray-400">
+                        <p class="pb-5">You can get started in less than 5 minutes. We offer over 500+ pre-built connectors and a drag-and-drop workflow canvas. Simply authenticate your services and start orchestrating AI pipelines immediately.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="glass-card rounded-xl border border-white/10 overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left font-semibold text-white flex justify-between items-center focus:outline-none">
+                        <span>Is my data secure and private?</span>
+                        <i class="fa-solid fa-chevron-down text-brand-500 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-6 text-sm text-gray-400">
+                        <p class="pb-5">Yes. We are SOC-2 Type II certified and compliant with GDPR. We do not use your proprietary data or workflow payloads to train public AI models. Enterprise plans support zero-data retention.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="glass-card rounded-xl border border-white/10 overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left font-semibold text-white flex justify-between items-center focus:outline-none">
+                        <span>Can I cancel or switch my plan at any time?</span>
+                        <i class="fa-solid fa-chevron-down text-brand-500 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-6 text-sm text-gray-400">
+                        <p class="pb-5">Absolutely. You can upgrade, downgrade, or cancel your subscription directly from your account settings at any time without extra fees or hidden charges.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="glass-card rounded-xl border border-white/10 overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left font-semibold text-white flex justify-between items-center focus:outline-none">
+                        <span>What happens after the 14-day free trial ends?</span>
+                        <i class="fa-solid fa-chevron-down text-brand-500 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300 ease-in-out px-6 text-sm text-gray-400">
+                        <p class="pb-5">At the end of your 14-day trial, you can choose a paid tier that fits your needs. If you choose not to subscribe, your account will pause executions automatically without deleting your configured workflows.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="py-20 relative z-10 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto rounded-3xl glass-card p-10 sm:p-16 border border-brand-500/30 text-center relative overflow-hidden shadow-2xl shadow-brand-500/20">
+            <div class="absolute -top-24 -right-24 w-72 h-72 bg-brand-500/20 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-brand-accent/20 rounded-full blur-3xl"></div>
+            
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-white leading-tight">
+                Ready to Supercharge Your <br><span class="gradient-text">Operations with AI?</span>
+            </h2>
+            <p class="mt-4 text-gray-300 text-base max-w-xl mx-auto">
+                Join thousands of forward-thinking developers and teams building the future of automated work.
+            </p>
+            <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4 max-w-md mx-auto">
+                <a href="#pricing" class="gradient-btn px-8 py-4 rounded-xl font-bold text-white text-base shadow-xl shadow-brand-500/30">
+                    Get Started For Free
+                </a>
+                <a href="#demo" class="glass-card glass-card-hover px-8 py-4 rounded-xl font-semibold text-gray-200 text-base">
+                    Explore Demo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 bg-dark-bg/80 pt-16 pb-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-10 pb-12 border-b border-white/5">
+                <!-- Brand Info -->
+                <div class="md:col-span-2">
+                    <a href="#" class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg gradient-btn flex items-center justify-center text-white font-bold text-lg">
+                            <i class="fa-solid fa-bolt-lightning"></i>
+                        </div>
+                        <span class="text-lg font-extrabold text-white">Pulse<span class="gradient-text">.AI</span></span>
+                    </a>
+                    <p class="mt-4 text-sm text-gray-400 max-w-sm">
+                        Next-generation AI workflow automation platform empowering hyper-growth teams.
+                    </p>
+                    
+                    <!-- Newsletter Form -->
+                    <div class="mt-6 max-w-sm">
+                        <p class="text-xs font-semibold text-gray-300 mb-2">Subscribe to product updates</p>
+                        <form id="newsletter-form" class="flex gap-2">
+                            <input type="email" required placeholder="Enter your work email" class="w-full bg-dark-card border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-brand-500">
+                            <button type="submit" class="gradient-btn px-4 py-2.5 rounded-xl text-xs font-semibold text-white shrink-0">Subscribe</button>
+                        </form>
+                        <span id="newsletter-success" class="hidden text-[11px] text-emerald-400 mt-2 block">Thanks for subscribing!</span>
+                    </div>
+                </div>
+
+                <!-- Footer Links 1 -->
+                <div>
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-4">Product</h4>
+                    <ul class="space-y-2.5 text-xs text-gray-400">
+                        <li><a href="#features" class="hover:text-white transition-colors">Features</a></li>
+                        <li><a href="#demo" class="hover:text-white transition-colors">Workflow Builder</a></li>
+                        <li><a href="#demo" class="hover:text-white transition-colors">Autonomous Agents</a></li>
+                        <li><a href="#pricing" class="hover:text-white transition-colors">Pricing Plans</a></li>
+                    </ul>
+                </div>
+
+                <!-- Footer Links 2 -->
+                <div>
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-4">Resources</h4>
+                    <ul class="space-y-2.5 text-xs text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Documentation</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">API Reference</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">System Status</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Community Forum</a></li>
+                    </ul>
+                </div>
+
+                <!-- Footer Links 3 -->
+                <div>
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-4">Company</h4>
+                    <ul class="space-y-2.5 text-xs text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+                <p>&copy; 2026 PulseAI Technologies Inc. All rights reserved.</p>
+                <div class="flex items-center gap-6">
+                    <a href="#" class="hover:text-gray-300 transition-colors" aria-label="Twitter"><i class="fa-brands fa-twitter text-base"></i></a>
+                    <a href="#" class="hover:text-gray-300 transition-colors" aria-label="GitHub"><i class="fa-brands fa-github text-base"></i></a>
+                    <a href="#" class="hover:text-gray-300 transition-colors" aria-label="Discord"><i class="fa-brands fa-discord text-base"></i></a>
+                    <a href="#" class="hover:text-gray-300 transition-colors" aria-label="LinkedIn"><i class="fa-brands fa-linkedin text-base"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Video Modal Container -->
+    <div id="video-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="glass-card max-w-3xl w-full rounded-2xl overflow-hidden border border-white/20 relative">
+            <button id="close-video-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 w-8 h-8 rounded-full bg-dark-bg/80 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="p-8 text-center">
+                <h3 class="text-xl font-bold text-white mb-2">PulseAI Demo Video</h3>
+                <p class="text-xs text-gray-400 mb-6">Interactive product walkthrough preview</p>
+                <div class="aspect-video bg-gray-900 rounded-xl flex flex-col items-center justify-center border border-white/10 relative overflow-hidden group cursor-pointer">
+                    <i class="fa-solid fa-circle-play text-6xl text-brand-500 group-hover:scale-110 transition-transform"></i>
+                    <span class="mt-3 text-xs text-gray-300">Click to start interactive walkthrough</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Interactions -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('flex');
+            });
+
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('flex');
+                });
+            });
+
+            // 2. Simulated Dynamic Live Hero Graph Bars
+            const graphContainer = document.getElementById('graph-bars');
+            const pulseCounter = document.getElementById('pulse-counter');
+            const barCount = 20;
+
+            function renderGraphBars() {
+                graphContainer.innerHTML = '';
+                for (let i = 0; i < barCount; i++) {
+                    const heightPercent = Math.floor(Math.random() * 65) + 30; // Random height between 30% - 95%
+                    const bar = document.createElement('div');
+                    bar.className = 'w-full bg-gradient-to-t from-brand-600 via-brand-accent to-brand-neon rounded-t-sm transition-all duration-500 opacity-80 hover:opacity-100';
+                    bar.style.height = `${heightPercent}%`;
+                    graphContainer.appendChild(bar);
+                }
+            }
+            
+            renderGraphBars();
+            setInterval(() => {
+                renderGraphBars();
+                if(pulseCounter) {
+                    const randomTasks = Math.floor(Math.random() * 300) + 700;
+                    pulseCounter.textContent = `Tasks: ${randomTasks}/s`;
+                }
+            }, 3000);
+
+            // 3. Interactive Tab Switching Logic
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const targetTab = btn.getAttribute('data-tab');
+
+                    // Reset buttons
+                    tabBtns.forEach(b => {
+                        b.classList.remove('active', 'border-brand-500/50', 'text-white', 'bg-brand-500/20');
+                        b.classList.add('text-gray-400');
+                    });
+
+                    // Set active button
+                    btn.classList.add('active', 'border-brand-500/50', 'text-white', 'bg-brand-500/20');
+                    btn.classList.remove('text-gray-400');
+
+                    // Hide all contents and show target
+                    tabContents.forEach(content => {
+                        content.classList.add('hidden');
+                    });
+                    document.getElementById(targetTab).classList.remove('hidden');
+                });
+            });
+
+            // 4. Pricing Toggle Switcher (Monthly / Annual)
+            const pricingToggle = document.getElementById('pricing-toggle');
+            const toggleDot = document.getElementById('toggle-dot');
+            const priceValues = document.querySelectorAll('.price-value');
+            const monthlyLabel = document.getElementById('monthly-label');
+            const annualLabel = document.getElementById('annual-label');
+            let isAnnual = true;
+
+            pricingToggle.addEventListener('click', () => {
+                isAnnual = !isAnnual;
+                if (isAnnual) {
+                    toggleDot.classList.add('translate-x-6');
+                    toggleDot.classList.remove('translate-x-0');
+                    annualLabel.classList.add('text-white');
+                    annualLabel.classList.remove('text-gray-400');
+                    monthlyLabel.classList.add('text-gray-400');
+                    monthlyLabel.classList.remove('text-white');
+
+                    priceValues.forEach(el => {
+                        el.textContent = el.getAttribute('data-annual');
+                    });
+                } else {
+                    toggleDot.classList.remove('translate-x-6');
+                    toggleDot.classList.add('translate-x-0');
+                    monthlyLabel.classList.add('text-white');
+                    monthlyLabel.classList.remove('text-gray-400');
+                    annualLabel.classList.add('text-gray-400');
+                    annualLabel.classList.remove('text-white');
+
+                    priceValues.forEach(el => {
+                        el.textContent = el.getAttribute('data-monthly');
+                    });
+                }
+            });
+
+            // 5. Accordion Logic for FAQ
+            const faqBtns = document.querySelectorAll('.faq-btn');
+
+            faqBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const answer = btn.nextElementSibling;
+                    const icon = btn.querySelector('i');
+
+                    // Toggle current faq
+                    if (answer.style.maxHeight) {
+                        answer.style.maxHeight = null;
+                        icon.classList.remove('rotate-180');
+                    } else {
+                        // Close other open FAQs
+                        document.querySelectorAll('.faq-answer').forEach(a => a.style.maxHeight = null);
+                        document.querySelectorAll('.faq-btn i').forEach(i => i.classList.remove('rotate-180'));
+
+                        answer.style.maxHeight = answer.scrollHeight + "px";
+                        icon.classList.add('rotate-180');
+                    }
+                });
+            });
+
+            // 6. Video Modal Logic
+            const openModalBtn = document.getElementById('open-video-modal');
+            const closeModalBtn = document.getElementById('close-video-modal');
+            const videoModal = document.getElementById('video-modal');
+
+            openModalBtn.addEventListener('click', () => {
+                videoModal.classList.remove('hidden');
+            });
+
+            closeModalBtn.addEventListener('click', () => {
+                videoModal.classList.add('hidden');
+            });
+
+            videoModal.addEventListener('click', (e) => {
+                if (e.target === videoModal) {
+                    videoModal.classList.add('hidden');
+                }
+            });
+
+            // 7. Newsletter Form Handler
+            const newsletterForm = document.getElementById('newsletter-form');
+            const newsletterSuccess = document.getElementById('newsletter-success');
+
+            newsletterForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                newsletterForm.reset();
+                newsletterSuccess.classList.remove('hidden');
+                setTimeout(() => {
+                    newsletterSuccess.classList.add('hidden');
+                }, 4000);
+            });
+        });
+    </script>
+</body>
+</html>

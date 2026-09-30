@@ -2,10 +2,10 @@
   "name": "lab4",
   "version": "1.0.0",
   "description": "",
-  "main": "prg3.js",
+  "main": "prg4.js",
   "scripts": {
-    "start": "node prg3.js",
-    "dev": "nodemon prg3.js"
+    "start": "node prg4.js",
+    "dev": "nodemon prg4.js"
   },
   "keywords": [],
   "author": "",

@@ -28,3 +28,15 @@
 
 
 it can be changed with send function 
+
+
+## Map
+array.map((item)=>{
+    return
+})
+
+array.map((item)=>())
+ tis function is used to iterate any array it must return new array s
+ exclude number of properties from any json object 
+ ## search 
+ to searach any item in json array we use find method it will return null on unsuccessful or on object on success
